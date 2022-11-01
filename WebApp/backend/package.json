@@ -1,0 +1,18 @@
+{
+  "name": "Procurement_For_Construction_Industry",
+  "version": "1.0.0",
+  "description": "This Web App supports Procurement for Construction Industry",
+  "main": "app.js",
+  "author": "Quad_Squad",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "nodemon --exec babel-node src/app.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.6",
+    "@babel/node": "^7.20.0",
+    "@babel/preset-env": "^7.19.4",
+    "nodemon": "^2.0.20"
+  }
+}
