@@ -7,6 +7,7 @@ import Login from "../screen/auth/Login";
 import Register from "../screen/auth/Register";
 import Forget from "../screen/auth/Forget";
 import Splash from "../screen/splash/Splash";
+import PlaceOrder from "../screen/PlaceOrder";
 
 const Stack = createNativeStackNavigator();
 
@@ -14,11 +15,12 @@ const AppRouter = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Splash">
-                <Stack.Screen name="Home" component={Home} />
+                <Stack.Screen options={{headerShown:false}} name="Home" component={Home} />
                 <Stack.Screen options={{headerShown:false}} name="Login" component={Login} />
                 <Stack.Screen options={{headerShown:false}} name="Register" component={Register} />
                 <Stack.Screen options={{headerShown:false}} name="Splash" component={Splash} />
                 <Stack.Screen options={{headerShown:false}} name="Forget" component={Forget} />
+                <Stack.Screen name="PlaceOrder" component={PlaceOrder} />
             </Stack.Navigator>
         </NavigationContainer>
     )
