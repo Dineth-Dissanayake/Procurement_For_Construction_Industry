@@ -1,10 +1,48 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Image, ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+
+import AuthContext from "../../api/AuthContext";
 
 const Register = () => {
 
     const navigation = useNavigation();
+    const {registerUser} = useContext(AuthContext);
+
+    const [credentials, setCredentials] = useState({
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    });
+
+    const handleInputChange = (value, name) => {
+        setCredentials({ ...credentials, [name]: value});
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        if(!credentials.username || !credentials.email || !credentials.password || !credentials.confirmPassword) {
+            alert("Please enter all required fields!");
+            return;
+        }
+
+        if(credentials.password !== credentials.confirmPassword) {
+            alert("Password do not match!");
+            return;
+        }
+        //console.log(credentials);
+        const userData = { ...credentials, confirmPassword: undefined };
+        registerUser(userData);
+        navigation.navigate("Login");
+        setCredentials({
+            username: '',
+            email: '',
+            password: '',
+            confirmPassword: ''
+        });
+    };
 
     return (
         <SafeAreaView>
@@ -25,19 +63,53 @@ const Register = () => {
                         </View>
                     </View>
                     <View style={styles.formInput}>
-                        <TextInput style={styles.textInput} placeholder="Username" />
+                        <TextInput 
+                            name={'username'}
+                            value={credentials.username}
+                            onChangeText={(text) => {
+                                handleInputChange(text, 'username')
+                            }}
+                            placeholder="Username"
+                            style={styles.textInput}
+                        />
                     </View>
                     <View style={styles.formInput}>
-                        <TextInput style={styles.textInput} placeholder="Email address" />
+                        <TextInput 
+                            name={'email'}
+                            value={credentials.email}
+                            onChangeText={(text) => {
+                                handleInputChange(text, 'email')
+                            }}
+                            placeholder="Email Address"
+                            style={styles.textInput}
+                        />
                     </View>
                     <View style={styles.formInput}>
-                        <TextInput style={styles.textInput} placeholder="Password" secureTextEntry={true} />
+                        <TextInput 
+                            name={'password'}
+                            value={credentials.password}
+                            onChangeText={(text) => {
+                                handleInputChange(text, 'password')
+                            }}
+                            style={styles.textInput}
+                            placeholder="Password" 
+                            secureTextEntry={true} 
+                        />
                     </View>
                     <View style={styles.formInput}>
-                        <TextInput style={styles.textInput} placeholder="Confirm Password" secureTextEntry={true} />
+                        <TextInput 
+                            name={'confirmPassword'}
+                            value={credentials.confirmPassword}
+                            onChangeText={(text) => {
+                                handleInputChange(text, 'confirmPassword')
+                            }}
+                            style={styles.textInput} 
+                            placeholder="Confirm Password" 
+                            secureTextEntry={true} 
+                        />
                     </View>
                     <View style={styles.formInput}>
-                        <TouchableOpacity style={styles.defaultButton} onPress={()=>{navigation.navigate("Login")}}>
+                        <TouchableOpacity style={styles.defaultButton} onPress={handleSubmit}>
                             <Text style={{textAlign:'center', fontSize:16, color:'#fff', fontWeight:'bold'}} >Register</Text>
                         </TouchableOpacity>
                     </View>

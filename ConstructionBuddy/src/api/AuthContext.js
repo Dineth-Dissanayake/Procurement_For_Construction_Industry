@@ -57,7 +57,7 @@ export const AuthContextProvider = ({children}) => {
 
     const registerUser = async (userData) => {
         try {
-            const res = await fetch(`http://localhost:8050/api/register`, {
+            const res = await fetch(`http://172.28.7.93:8090/api/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -77,9 +77,32 @@ export const AuthContextProvider = ({children}) => {
       };
 
 
+      const addOrder = async (userData) => {
+        try {
+            const res = await fetch(`http://172.28.7.93:8090/order/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ ...userData }),
+            });
+
+            const result = await res.json();
+    
+            if (!result.error) {
+                alert("Order Added Successfully!");
+            } else {
+                alert(result.error);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+      };
+
+
 
       return (
-        <AuthContext.Provider value={{ loginUser, user, setUser, registerUser }}>
+        <AuthContext.Provider value={{ loginUser, user, setUser, registerUser, addOrder }}>
             {children}
         </AuthContext.Provider>
       );

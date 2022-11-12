@@ -21,7 +21,7 @@ import AuthContext from "../api/AuthContext";
 
                 <View style={styles.container}>
                     <Text style={styles.myTitle}>Welcome Back,</Text>
-                    <Text style={styles.myTitle}>{user.username}</Text>
+                    <Text style={styles.myTitle}>USER!</Text>
                 </View>
                 <View style={{flexDirection:'row',marginTop:100}}>
                     <TouchableOpacity style={styles.defaultButton1} onPress={()=>{navigation.navigate("PlaceOrder")}}>
@@ -36,7 +36,7 @@ import AuthContext from "../api/AuthContext";
                     <TouchableOpacity style={styles.defaultButton1} onPress={()=>{navigation.navigate("Items")}}>
                             <Text style={{textAlign:'center', fontSize:16, color:'#fff', fontWeight:'bold'}} >Items</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.defaultButton1} onPress={()=>{navigation.navigate("")}}>
+                    <TouchableOpacity style={styles.defaultButton1} onPress={()=>{navigation.navigate("Supplier")}}>
                             <Text style={{textAlign:'center', fontSize:16, color:'#fff', fontWeight:'bold'}} >Suppliers</Text>
                     </TouchableOpacity>
                 </View>

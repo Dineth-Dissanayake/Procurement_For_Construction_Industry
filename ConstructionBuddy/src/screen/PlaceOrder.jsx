@@ -2,43 +2,58 @@ import { useNavigation } from "@react-navigation/native";
 import React, { useContext, useState } from "react";
 import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
+import AuthContext from "../api/AuthContext";
+
 
 const PlaceOrder = () => {
 
     const navigation = useNavigation();
+    const {addOrder} = useContext(AuthContext);
 
     const [credentials, setCredentials] = useState({
-        proName: "",
-        proID:"",
-        supName:"",
-        qty:"",
-        price:"",
-        total:"",
-        date:""
-    })
+        proName: '',
+        proID: '',
+        supName: '',
+        qty: '',
+        price: '',
+        total: '',
+        date: '',
+        status: ''
+    });
+
+    const handleInputChange = (value, name) => {
+        setCredentials({ ...credentials, [name]: value});
+    };
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const {proName, proID, supName, qty, price, total, date} = credentials;
-        const data = {
-            proName: proName,
-            proID: proID,
-            supName: supName,
-            qty: qty,
-            price: price,
-            total: total, 
-            date: date
-        }
-        // if(
-        //     !this.state.categoryId ||
-        //     !this.state.Category
-        //     ) {
-        //     alert("Please enter all required fields!");
-        //     return;
-        // }
-        console.log(data);
-    }
+        if(
+            !credentials.proName ||
+            !credentials.proID ||
+            !credentials.supName ||
+            !credentials.qty ||
+            !credentials.price ||
+            !credentials.total ||
+            !credentials.date
+            ) {
+                alert("Please enter all required fields!");
+                return;
+            }
+        console.log(credentials);
+        addOrder(credentials);
+        navigation.navigate("Home");
+        setCredentials({
+            proName: '',
+            proID: '',
+            supName: '',
+            qty: '',
+            price: '',
+            total: '',
+            date: '',
+            status: ''
+        })
+    };
 
     return (
         <SafeAreaView style={{flex:1}}>
@@ -50,6 +65,10 @@ const PlaceOrder = () => {
                 <View style={{padding:20,backgroundColor:'#fff'}}>
                     <View style={styles.formInput}>
                         <TextInput 
+                            name={'proName'}
+                            onChangeText={(text) => {
+                                handleInputChange(text, 'proName')
+                            }}
                             style={styles.textInput} 
                             placeholder="Product Name" 
                             defaultValue={credentials.proName}
@@ -57,6 +76,10 @@ const PlaceOrder = () => {
                     </View>
                     <View style={styles.formInput}>
                         <TextInput 
+                            name={'proID'}
+                            onChangeText={(text) => {
+                                handleInputChange(text, 'proID')
+                            }}
                             style={styles.textInput} 
                             placeholder="Product ID" 
                             defaultValue={credentials.proID}
@@ -64,6 +87,10 @@ const PlaceOrder = () => {
                     </View>
                     <View style={styles.formInput}>
                         <TextInput 
+                            name={'supName'}
+                            onChangeText={(text) => {
+                                handleInputChange(text, 'supName')
+                            }}
                             style={styles.textInput} 
                             placeholder="Supplier Name"
                             defaultValue={credentials.supName}
@@ -71,27 +98,46 @@ const PlaceOrder = () => {
                     </View>
                     <View style={styles.formInput}>
                         <TextInput 
+                            name={'qty'}
+                            onChangeText={(text) => {
+                                handleInputChange(text, 'qty')
+                            }}
                             style={styles.textInput} 
                             placeholder="Quantity"
                             defaultValue={credentials.qty}
+                            keyboardType="numeric"
                         />
                     </View>
                     <View style={styles.formInput}>
                         <TextInput 
+                            name={'price'}
+                            onChangeText={(text) => {
+                                handleInputChange(text, 'price')
+                            }}
                             style={styles.textInput} 
                             placeholder="Rate Price"
                             defaultValue={credentials.price}
+                            keyboardType="numeric"
                         />
                     </View>
                     <View style={styles.formInput}>
                         <TextInput 
+                            name={'total'}
+                            onChangeText={(text) => {
+                                handleInputChange(text, 'total')
+                            }}
                             style={styles.textInput} 
                             placeholder="Total Price"
                             defaultValue={credentials.total}
+                            keyboardType="numeric"
                         />
                     </View>
                     <View style={styles.formInput}>
                         <TextInput
+                            name={'date'}
+                            onChangeText={(text) => {
+                                handleInputChange(text, 'date')
+                            }}
                             style={styles.textInput} 
                             placeholder="Date"
                             defaultValue={credentials.date}
