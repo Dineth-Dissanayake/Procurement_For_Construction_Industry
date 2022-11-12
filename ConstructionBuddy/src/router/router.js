@@ -8,6 +8,7 @@ import Register from "../screen/auth/Register";
 import Forget from "../screen/auth/Forget";
 import Splash from "../screen/splash/Splash";
 import PlaceOrder from "../screen/PlaceOrder";
+import OrderHistory from "../screen/OrderHistory";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ const AppRouter = () => {
                 <Stack.Screen options={{headerShown:false}} name="Splash" component={Splash} />
                 <Stack.Screen options={{headerShown:false}} name="Forget" component={Forget} />
                 <Stack.Screen name="PlaceOrder" component={PlaceOrder} />
+                <Stack.Screen name="OrderHistory" component={OrderHistory} />
             </Stack.Navigator>
         </NavigationContainer>
     )

@@ -1,10 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useContext } from "react";
 import { Image, ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
+import AuthContext from "../api/AuthContext";
 
  const Home = () => {
 
     const navigation = useNavigation();
+    const { user, setUser } = useContext(AuthContext);
 
     return (
         <SafeAreaView style={{flex:1}}>
@@ -17,20 +20,20 @@ import { Image, ImageBackground, SafeAreaView, ScrollView, StyleSheet, Text, Tou
                 </View>
 
                 <View style={styles.container}>
-                    <Text style={styles.myTitle}>Welcome,</Text>
-                    <Text style={styles.myTitle}>Sampath Perera</Text>
+                    <Text style={styles.myTitle}>Welcome Back,</Text>
+                    <Text style={styles.myTitle}>{user.username}</Text>
                 </View>
                 <View style={{flexDirection:'row',marginTop:100}}>
                     <TouchableOpacity style={styles.defaultButton1} onPress={()=>{navigation.navigate("PlaceOrder")}}>
                             <Text style={{textAlign:'center', fontSize:16, color:'#fff', fontWeight:'bold'}} >New Order</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.defaultButton1} onPress={()=>{navigation.navigate("")}}>
+                    <TouchableOpacity style={styles.defaultButton1} onPress={()=>{navigation.navigate("OrderHistory")}}>
                             <Text style={{textAlign:'center', fontSize:16, color:'#fff', fontWeight:'bold'}} >Order History</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={{flexDirection:'row',marginTop:50}}>
-                    <TouchableOpacity style={styles.defaultButton1} onPress={()=>{navigation.navigate("")}}>
+                    <TouchableOpacity style={styles.defaultButton1} onPress={()=>{navigation.navigate("Items")}}>
                             <Text style={{textAlign:'center', fontSize:16, color:'#fff', fontWeight:'bold'}} >Items</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.defaultButton1} onPress={()=>{navigation.navigate("")}}>
