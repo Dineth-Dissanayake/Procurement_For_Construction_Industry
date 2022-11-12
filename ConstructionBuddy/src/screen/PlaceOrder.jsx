@@ -1,10 +1,44 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useContext, useState } from "react";
 import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+
 
 const PlaceOrder = () => {
 
     const navigation = useNavigation();
+
+    const [credentials, setCredentials] = useState({
+        proName: "",
+        proID:"",
+        supName:"",
+        qty:"",
+        price:"",
+        total:"",
+        date:""
+    })
+
+    const onSubmit = async (e) => {
+        e.preventDefault();
+
+        const {proName, proID, supName, qty, price, total, date} = credentials;
+        const data = {
+            proName: proName,
+            proID: proID,
+            supName: supName,
+            qty: qty,
+            price: price,
+            total: total, 
+            date: date
+        }
+        // if(
+        //     !this.state.categoryId ||
+        //     !this.state.Category
+        //     ) {
+        //     alert("Please enter all required fields!");
+        //     return;
+        // }
+        console.log(data);
+    }
 
     return (
         <SafeAreaView style={{flex:1}}>
@@ -15,29 +49,57 @@ const PlaceOrder = () => {
 
                 <View style={{padding:20,backgroundColor:'#fff'}}>
                     <View style={styles.formInput}>
-                        <TextInput style={styles.textInput} placeholder="Product Name" />
+                        <TextInput 
+                            style={styles.textInput} 
+                            placeholder="Product Name" 
+                            defaultValue={credentials.proName}
+                        />
                     </View>
                     <View style={styles.formInput}>
-                        <TextInput style={styles.textInput} placeholder="Product ID" />
+                        <TextInput 
+                            style={styles.textInput} 
+                            placeholder="Product ID" 
+                            defaultValue={credentials.proID}
+                        />
                     </View>
                     <View style={styles.formInput}>
-                        <TextInput style={styles.textInput} placeholder="Supplier Name"/>
+                        <TextInput 
+                            style={styles.textInput} 
+                            placeholder="Supplier Name"
+                            defaultValue={credentials.supName}
+                        />
                     </View>
                     <View style={styles.formInput}>
-                        <TextInput style={styles.textInput} placeholder="Quantity"/>
+                        <TextInput 
+                            style={styles.textInput} 
+                            placeholder="Quantity"
+                            defaultValue={credentials.qty}
+                        />
                     </View>
                     <View style={styles.formInput}>
-                        <TextInput style={styles.textInput} placeholder="Rate Price" />
+                        <TextInput 
+                            style={styles.textInput} 
+                            placeholder="Rate Price"
+                            defaultValue={credentials.price}
+                        />
                     </View>
                     <View style={styles.formInput}>
-                        <TextInput style={styles.textInput} placeholder="Total Price" />
+                        <TextInput 
+                            style={styles.textInput} 
+                            placeholder="Total Price"
+                            defaultValue={credentials.total}
+                        />
                     </View>
                     <View style={styles.formInput}>
-                        <TextInput style={styles.textInput} placeholder="Date"/>
+                        <TextInput
+                            style={styles.textInput} 
+                            placeholder="Date"
+                            defaultValue={credentials.date}
+                        />
                     </View>
 
                     <View style={styles.formInput}>
-                        <TouchableOpacity style={styles.defaultButton} onPress={()=>{navigation.navigate("Home")}}>
+                        <TouchableOpacity style={styles.defaultButton} onPress={onSubmit}>
                             <Text style={{textAlign:'center', fontSize:16, color:'#fff', fontWeight:'bold'}} >SUBMIT</Text>
                         </TouchableOpacity>
                     </View>

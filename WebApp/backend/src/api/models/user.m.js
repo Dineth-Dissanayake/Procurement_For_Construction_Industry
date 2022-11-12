@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-const librarianSchema = new Schema({
+const UserSchema = new Schema({
   username: {
     type: String,
     required: [true, "Required⚠️"],
@@ -18,4 +18,4 @@ const librarianSchema = new Schema({
 });
 
 
-module.exports = mongoose.model("librarian", librarianSchema);
+module.exports = mongoose.model("User", UserSchema);
