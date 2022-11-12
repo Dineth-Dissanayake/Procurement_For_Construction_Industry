@@ -28,6 +28,10 @@ const Login = () => {
         //console.log(credentials);
         loginUser(credentials);
         navigation.navigate("Home");
+        setCredentials({
+            username: '',
+            password: ''
+        });
     };
 
     return (
@@ -72,7 +76,7 @@ const Login = () => {
                         />
                     </View>
 
-                    <Text>{credentials.username+""+credentials.password}</Text>
+                    {/* <Text>{credentials.username+""+credentials.password}</Text> */}
 
                     <View style={styles.formInput}>
                         <TouchableOpacity onPress={()=>{navigation.navigate("Forget")}}>
